@@ -56,7 +56,6 @@ const init = async () => {
 
         tabTimeout = setTimeout(() => {
             let nextIndex = getNextTabIndex()
-            currentIndex = nextIndex
             tabLinks[nextIndex].click()
         }, duration * 1000)
     }
