@@ -21,9 +21,6 @@ typings/
 # dotenv environment variables file
 .env
 
-# Production files
-dist
-
 # Mac OS temp file
 .DS_STORE
 
