@@ -45,7 +45,7 @@ const init = () => {
 
     const autoPlayTabs = () => {
         //console.log({ currentIndex })
-        const duration = tabVideos[currentIndex].duration
+        const duration = tabVideos[currentIndex]?.duration || 5
         const loader = tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]')
         if (loader) {
             animateLoader(loader as HTMLDivElement, duration);
