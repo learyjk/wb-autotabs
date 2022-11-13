@@ -74,7 +74,7 @@ const init = async () => {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                 if (mutation.target.className.includes('w--current')) {
                     //console.log('active tab is: ', mutation.target)
-                    gsap.to(tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]'), { height: "0%", duration: 0.2 });
+                    gsap.set(tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]'), { height: "0%" });
                     tween.kill()
                     clearTimeout(tabTimeout)
                     currentIndex = parseInt(tabsComponent.querySelector<HTMLAnchorElement>(CURRENT_CLASS)?.getAttribute('data-w-tab')?.slice(-1) || "1", 10) - 1
