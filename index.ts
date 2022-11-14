@@ -10,7 +10,8 @@ const init = async () => {
             console.error('no tabsComponent component found')
             return
         };
-        const tabLinks = tabsComponent.querySelectorAll('a')
+        const tabLinks = tabsComponent.querySelector('.tabs-menu')?.childNodes as NodeListOf<HTMLAnchorElement>
+        if (!tabLinks) return
         const tabVideos = tabsComponent.querySelectorAll('video')
 
         let currentIndex = parseInt(tabsComponent.querySelector<HTMLAnchorElement>(CURRENT_CLASS)?.getAttribute('data-w-tab')?.slice(-1) || "1", 10) - 1
@@ -56,7 +57,7 @@ const init = async () => {
         const autoPlayTabs = () => {
             //console.log({ currentIndex })
             const duration = tabVideos[currentIndex]?.duration || 5
-            const loader = tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]')
+            const loader = (tabLinks[currentIndex] as Element).querySelector('[wb-autotabs="loader"]')
             if (loader) {
                 animateLoader(loader as HTMLDivElement, duration);
             }
@@ -64,7 +65,7 @@ const init = async () => {
             tabVideos[currentIndex].currentTime = 0
 
             tabTimeout = setTimeout(() => {
-                let nextIndex = getNextTabIndex()
+                let nextIndex = getNextTabIndex();
                 tabLinks[nextIndex].click()
             }, duration * 1000)
         }

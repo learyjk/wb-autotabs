@@ -11,8 +11,8 @@ If content is video, autoplay duration will be equal to length of each individua
 
 2. Define attribute ```wb-autotabs="component"``` on your Tabs elements.
 
-3. (Optional) Define your loader bars with attribute ```wb-autotabs="loader"```
-NOTE: This wokrs for horizontal and vertical loaders by checking intial width = 0 (for a vertical loader) or height = 0 (for horizontal loaders). Animates with gsap to width/height of 100%.
+3. (Optional) Define your progress bars with attribute ```wb-autotabs="loader"```
+NOTE: This works for horizontal and vertical progress bars by checking intial width = 0 (for a horizontal loader) or height = 0 (for veritcal loaders). Animates with gsap to width/height of 100%.
 
 ## Demo
 
