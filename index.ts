@@ -83,8 +83,14 @@ const init = async () => {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                     if (mutation.target.className.includes('w--current')) {
                         //console.log('active tab is: ', mutation.target)
-                        gsap.set(tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]'), loaderDirection === "horizontal" ? { width: "0%" } : { height: "0%" });
-                        tween.kill()
+                        const loader = tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]')
+                        if (loader) {
+                            gsap.set(loader, loaderDirection === "horizontal" ? { width: "0%" } : { height: "0%" });
+                        }
+
+                        if (tween) {
+                            tween.kill()
+                        }
                         clearTimeout(tabTimeout)
                         currentIndex = parseInt(tabsComponent.querySelector<HTMLAnchorElement>(CURRENT_CLASS)?.getAttribute('data-w-tab')?.slice(-1) || "1", 10) - 1
                         autoPlayTabs()
