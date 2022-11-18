@@ -10,8 +10,9 @@ const init = async () => {
             console.error('no tabsComponent component found')
             return
         };
-        const tabLinks = tabsComponent.querySelector('.tabs-menu')?.childNodes as NodeListOf<HTMLAnchorElement>
+        const tabLinks = tabsComponent.querySelector('.w-tab-menu')?.childNodes as NodeListOf<HTMLAnchorElement>
         if (!tabLinks) return
+
         const tabVideos = tabsComponent.querySelectorAll('video')
 
         let currentIndex = parseInt(tabsComponent.querySelector<HTMLAnchorElement>(CURRENT_CLASS)?.getAttribute('data-w-tab')?.slice(-1) || "1", 10) - 1
@@ -34,8 +35,6 @@ const init = async () => {
         }
 
         const animateLoader = (loader: HTMLDivElement, duration: number) => {
-            let width = getComputedStyle(loader).width
-            let height = getComputedStyle(loader).height
             if (loaderDirection === "horizontal") {
                 //animate width
                 tween = gsap.fromTo(loader, { width: "0%" }, {
@@ -57,6 +56,7 @@ const init = async () => {
         const autoPlayTabs = () => {
             //console.log({ currentIndex })
             const duration = tabVideos[currentIndex]?.duration || 5
+            //console.log({ duration })
             const loader = (tabLinks[currentIndex] as Element).querySelector('[wb-autotabs="loader"]')
             if (loader) {
                 animateLoader(loader as HTMLDivElement, duration);
@@ -84,10 +84,9 @@ const init = async () => {
                     if (mutation.target.className.includes('w--current')) {
                         //console.log('active tab is: ', mutation.target)
                         const loader = tabLinks[currentIndex].querySelector('[wb-autotabs="loader"]')
-                        if (loader) {
+                        if (!!loader) {
                             gsap.set(loader, loaderDirection === "horizontal" ? { width: "0%" } : { height: "0%" });
                         }
-
                         if (tween) {
                             tween.kill()
                         }
